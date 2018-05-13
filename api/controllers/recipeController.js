@@ -43,5 +43,5 @@ exports.delete = function (req, res) {
         if (err)
             res.send(err);
         res.json({message: 'Recipe successfully deleted'});
-});
+    });
 };
