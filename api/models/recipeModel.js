@@ -7,6 +7,9 @@ var RecipeSchema = new Schema({
         type: String,
         required: 'Please enter the recipe title'
     },
+    img_url: {
+        type: String,
+    },
     category: {
         type: [{
             type: String,

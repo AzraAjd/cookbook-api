@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var recipeCategories = require('../controllers/categoriesController');
 var recipes = require('../controllers/recipeController');
 var users = require('../controllers/userController');
 var authentication = require('../controllers/authenticationController');
@@ -29,5 +30,8 @@ router.route('/users')
 router.get('/users/:userId', auth, users.get);
 router.put('/users/:userId', auth, users.update);
 router.delete('/users/:userId', auth, users.delete);
+
+router.route('/recipe-categories')
+    .get(recipeCategories.list)
 
 module.exports = router;
