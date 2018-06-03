@@ -11,21 +11,19 @@ exports.list = function (req, res) {
     });
 };
 
-exports.create = function (req, res) {
-    var new_user = new User(req.body);
-    new_user.save(function (err, user) {
-        if (err)
-            res.send(err);
-        res.json(user);
-    });
-};
-
 exports.get = function (req, res) {
-    User.findById(req.params.userId, function (err, user) {
-        if (err)
-            res.send(err);
-        res.json(user);
-    });
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message" : "UnauthorizedError: private profile"
+        });
+    } else {
+        // Otherwise continue
+        User.findById(req.payload._id, function(err, user) {
+            if (err)
+                res.send(err);
+            res.status(200).json(user);
+        });
+    }
 };
 
 exports.update = function (req, res) {
